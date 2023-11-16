@@ -1,27 +1,26 @@
-#include "mine.h"
-
+#include "monty.h"
 /**
-* rotl - Rotates the stack to the top.
-* @stack: A pointer to the head of the stack
-* @line: The current line number
-*/
-void rotl(my_stack_t **stack, unsigned int line)
+  *f_rotl- rotates the stack to the top
+  *@head: stack head
+  *@counter: line_number
+  *Return: no return
+ */
+void f_rotl(stack_t **head,  __attribute__((unused)) unsigned int counter)
 {
-(void)line; /* Unused parameter, suppress compiler warning */
+	stack_t *tmp = *head, *aux;
 
-if (stack && *stack && (*stack)->next)
-{
-	my_stack_t *new_top = *stack;
-	my_stack_t *current = *stack;
-
-	while (current->next)
-		current = current->next;
-
-	*stack = new_top->next;
-	new_top->next = NULL;
-	new_top->prev = current;
-	current->next = new_top;
+	if (*head == NULL || (*head)->next == NULL)
+	{
+		return;
+	}
+	aux = (*head)->next;
+	aux->prev = NULL;
+	while (tmp->next != NULL)
+	{
+		tmp = tmp->next;
+	}
+	tmp->next = *head;
+	(*head)->next = NULL;
+	(*head)->prev = tmp;
+	(*head) = aux;
 }
-/* Do nothing if the stack is empty or contains only one element */
-}
-

@@ -1,22 +1,25 @@
-#include "mine.h"
-
+#include "monty.h"
 /**
-* pstr - Prints the string starting at the top of the stack
-* @stack: A pointer to the head of the stack
-* @line_number: The line number of the instruction
+ * f_pstr - prints the string starting at the top of the stack,
+ * followed by a new
+ * @head: stack head
+ * @counter: line_number
+ * Return: no return
 */
-void pstr(my_stack_t **stack, unsigned int line_number)
+void f_pstr(stack_t **head, unsigned int counter)
 {
-my_stack_t *current = *stack;
+	stack_t *h;
+	(void)counter;
 
-(void)line_number;
-
-while (current && current->n != 0 && isascii(current->n))
-{
-	printf("%c", current->n);
-	current = current->next;
+	h = *head;
+	while (h)
+	{
+		if (h->n > 127 || h->n <= 0)
+		{
+			break;
+		}
+		printf("%c", h->n);
+		h = h->next;
+	}
+	printf("\n");
 }
-
-printf("\n");
-}
-

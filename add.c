@@ -1,25 +1,32 @@
-#include "mine.h"
-
+#include "monty.h"
 /**
-* add - Adds the top two elements of the stack
-* @stack: A pointer to the head of the stack
-* @line_number: The line number of the instruction
+ * f_add - adds the top two elements of the stack.
+ * @head: stack head
+ * @counter: line_number
+ * Return: no return
 */
-void add(my_stack_t **stack, unsigned int line_number)
+void f_add(stack_t **head, unsigned int counter)
 {
-my_stack_t *top = *stack;
-my_stack_t *second = top->next;
+	stack_t *h;
+	int len = 0, aux;
 
-if (*stack == NULL || (*stack)->next == NULL)
-{
-	fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
-	exit(EXIT_FAILURE);
+	h = *head;
+	while (h)
+	{
+		h = h->next;
+		len++;
+	}
+	if (len < 2)
+	{
+		fprintf(stderr, "L%d: can't add, stack too short\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
+		exit(EXIT_FAILURE);
+	}
+	h = *head;
+	aux = h->n + h->next->n;
+	h->next->n = aux;
+	*head = h->next;
+	free(h);
 }
-
-
-
-second->n += top->n; /* Add the top element to the second element */
-*stack = second; /* Update the stack pointer to the new second element */
-free(top);           /* Free the old top element */
-}
-

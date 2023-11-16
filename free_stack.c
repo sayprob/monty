@@ -1,17 +1,17 @@
-#include "mine.h"
-
+#include "monty.h"
 /**
- * freeStack - Frees a stack.
- * @stack: A pointer to the head of the stack.
- */
-void freeStack(my_stack_t *stack)
+* free_stack - frees a doubly linked list
+* @head: head of the stack
+*/
+void free_stack(stack_t *head)
 {
-	my_stack_t *temp;
+	stack_t *aux;
 
-	while (stack != NULL)
+	aux = head;
+	while (head)
 	{
-		temp = stack;
-		stack = stack->next;
-		free(temp);
+		aux = head->next;
+		free(head);
+		head = aux;
 	}
 }

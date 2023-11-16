@@ -1,21 +1,21 @@
-#include "mine.h"
-
+#include "monty.h"
 /**
-* pall - Prints all the values on the stack
-* @stack: A pointer to the head of the stack
-* @line_number: The line number of the instruction
+ * f_pall - prints the stack
+ * @head: stack head
+ * @counter: no used
+ * Return: no return
 */
-void pall(my_stack_t **stack, unsigned int line_number)
+void f_pall(stack_t **head, unsigned int counter)
 {
-my_stack_t *current = *stack;
+	stack_t *h;
+	(void)counter;
 
-(void)line_number;
-
-while (current)
-{
-	printf("%d\n", current->n);
-	current = current->next;
+	h = *head;
+	if (h == NULL)
+		return;
+	while (h)
+	{
+		printf("%d\n", h->n);
+		h = h->next;
+	}
 }
-}
-
-
