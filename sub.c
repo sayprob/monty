@@ -1,29 +1,24 @@
-#include "monty.h"
-/**
-  *f_sub- sustration
-  *@head: stack head
-  *@counter: line_number
-  *Return: no return
- */
-void f_sub(stack_t **head, unsigned int counter)
-{
-	stack_t *aux;
-	int sus, nodes;
+#include "mine.h"
 
-	aux = *head;
-	for (nodes = 0; aux != NULL; nodes++)
-		aux = aux->next;
-	if (nodes < 2)
+/**
+ * sub - Subtracts the top element from the second top element of the stack
+ * @stack: A pointer to the head of the stack
+ * @line_number: The line number of the instruction
+ */
+void sub(my_stack_t **stack, unsigned int line_number)
+{
+	my_stack_t *top = *stack;
+	my_stack_t *second_top = top->next;
+
+	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 	{
-		fprintf(stderr, "L%d: can't sub, stack too short\n", counter);
-		fclose(bus.file);
-		free(bus.content);
-		free_stack(*head);
+		fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	aux = *head;
-	sus = aux->next->n - aux->n;
-	aux->next->n = sus;
-	*head = aux->next;
-	free(aux);
+
+	second_top->n -= top->n;
+	*stack = second_top;
+	(*stack)->prev = NULL;
+
+	free(top);
 }
